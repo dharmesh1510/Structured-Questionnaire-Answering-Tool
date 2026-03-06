@@ -1,0 +1,7 @@
+Security Policy v3.2
+
+All production data is encrypted in transit using TLS 1.2 or higher and encrypted at rest using AES-256.
+Employee access to production environments requires SSO and multi-factor authentication.
+Administrative access is granted through role-based access control and least-privilege principles.
+Security logs are retained for 365 days in a centralized logging system.
+Penetration tests are completed annually by an external vendor and critical findings are remediated within 30 days.

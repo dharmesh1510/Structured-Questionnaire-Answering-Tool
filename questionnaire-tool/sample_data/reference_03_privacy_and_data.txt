@@ -1,0 +1,8 @@
+Privacy and Data Handling Standard v1.9
+
+AlmaLedger stores customer financial metadata in US-based cloud regions.
+Customer data is logically separated by tenant ID.
+Backups are encrypted and retained for 35 days.
+Backup restoration tests are performed quarterly.
+Data deletion requests are fulfilled within 30 days unless legal retention obligations apply.
+Subprocessors are reviewed annually by legal and security teams.

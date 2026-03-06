@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="panel hero reveal">
+  <h1>Dashboard</h1>
+  <p>Build runs from reference data and structured questionnaires. Generate answers only when evidence exists.</p>
+</section>
+{% if error %}<p class="error reveal">{{ error }}</p>{% endif %}
+<section class="grid">
+  <article class="panel reveal">
+    <h3>Upload reference document</h3>
+    <form action="/reference/upload" method="post" enctype="multipart/form-data">
+      <input type="file" name="file" required />
+      <button type="submit">Upload reference</button>
+    </form>
+    <h4>Current references</h4>
+    <ul class="file-list">
+      {% for doc in docs %}
+      <li>
+        <span>{{ doc.filename }}</span>
+        <span class="muted">{{ doc.created_at.strftime('%Y-%m-%d %H:%M') }}</span>
+        <form class="inline-form" action="/reference/{{ doc.id }}/delete" method="post" onsubmit="return confirm('Delete this reference document?');">
+          <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+        </form>
+      </li>
+      {% else %}
+      <li><span class="muted">No reference documents uploaded yet.</span></li>
+      {% endfor %}
+    </ul>
+  </article>
+
+  <article class="panel reveal">
+    <h3>Upload questionnaire</h3>
+    <form action="/questionnaire/upload" method="post" enctype="multipart/form-data">
+      <label>Run title</label>
+      <input type="text" name="title" placeholder="Security Review - Q1" required />
+      <input type="file" name="file" required />
+      <button type="submit">Create run</button>
+    </form>
+    <h4>Runs</h4>
+    <ul class="file-list">
+      {% for run in runs %}
+      <li>
+        <a href="/runs/{{ run.id }}">{{ run.title }}</a>
+        <span class="muted">{{ run.created_at.strftime('%Y-%m-%d %H:%M') }}</span>
+        <form class="inline-form" action="/runs/{{ run.id }}/reuse" method="post">
+          <button type="submit" class="btn btn-secondary btn-sm">Reuse</button>
+        </form>
+        <form class="inline-form" action="/runs/{{ run.id }}/delete" method="post" onsubmit="return confirm('Delete this questionnaire run and all answers?');">
+          <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+        </form>
+      </li>
+      {% else %}
+      <li><span class="muted">No questionnaire runs yet.</span></li>
+      {% endfor %}
+    </ul>
+  </article>
+</section>
+{% endblock %}

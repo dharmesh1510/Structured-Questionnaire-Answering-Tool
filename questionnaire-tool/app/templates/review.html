@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="panel reveal">
+  <h1>Review: {{ run.title }}</h1>
+  <div class="stats-grid">
+    <div class="stat">
+      <div class="stat-label">Total Questions</div>
+      <div class="stat-value">{{ summary.total }}</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Answered With Citations</div>
+      <div class="stat-value">{{ summary.answered_with_citations }}</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Not Found</div>
+      <div class="stat-value">{{ summary.not_found }}</div>
+    </div>
+  </div>
+  <div class="summary">
+    <span>Total: {{ summary.total }}</span>
+    <span>Answered w/ citations: {{ summary.answered_with_citations }}</span>
+    <span>Not found: {{ summary.not_found }}</span>
+  </div>
+  <div class="actions">
+    <a href="/runs/{{ run.id }}" class="btn btn-secondary">Back to run</a>
+    <a href="/runs/{{ run.id }}/export" class="btn">Export output</a>
+  </div>
+</section>
+
+<form action="/runs/{{ run.id }}/review/save" method="post">
+  <section class="panel reveal">
+    <h3>Edit answers before export</h3>
+    {% for question in questions %}
+    <article class="question-card reveal">
+      <p><strong>Q{{ question.position }}.</strong> {{ question.text }}</p>
+      <textarea name="answer_{{ question.id }}" rows="3">{% if question.answer %}{{ question.answer.edited_answer or question.answer.generated_answer }}{% endif %}</textarea>
+      <p class="meta">Confidence: {% if question.answer %}{{ question.answer.confidence }}{% else %}0{% endif %}</p>
+      <p class="meta">
+        Citations:
+        {% if question.answer and question.answer.citations %}
+          {{ question.answer.citations | join("; ") }}
+        {% else %}
+          -
+        {% endif %}
+      </p>
+      {% if question.answer and question.answer.evidence_snippets %}
+      <details>
+        <summary>Evidence snippets</summary>
+        <ul>
+          {% for snip in question.answer.evidence_snippets %}
+          <li>{{ snip }}</li>
+          {% endfor %}
+        </ul>
+      </details>
+      {% endif %}
+    </article>
+    {% endfor %}
+    <button type="submit">Save edits</button>
+  </section>
+</form>
+
+<form action="/runs/{{ run.id }}/regenerate" method="post">
+  <section class="panel reveal">
+    <h3>Partial regeneration</h3>
+    <p class="muted">Select questions to regenerate.</p>
+    <div class="checkbox-grid">
+      {% for question in questions %}
+      <label><input type="checkbox" name="question_ids" value="{{ question.id }}" /> Q{{ question.position }}</label>
+      {% endfor %}
+    </div>
+    <button type="submit">Regenerate selected</button>
+  </section>
+</form>
+{% endblock %}

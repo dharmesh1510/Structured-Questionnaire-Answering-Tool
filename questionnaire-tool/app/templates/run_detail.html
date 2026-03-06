@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="panel reveal">
+  <h1>{{ run.title }}</h1>
+  <p class="muted">Source file: {{ run.original_filename }} | Questions: {{ summary.total }}</p>
+  <div class="stats-grid">
+    <div class="stat">
+      <div class="stat-label">Total Questions</div>
+      <div class="stat-value">{{ summary.total }}</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Answered With Citations</div>
+      <div class="stat-value">{{ summary.answered_with_citations }}</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Not Found</div>
+      <div class="stat-value">{{ summary.not_found }}</div>
+    </div>
+  </div>
+  <div class="summary">
+    <span>Total: {{ summary.total }}</span>
+    <span>Answered w/ citations: {{ summary.answered_with_citations }}</span>
+    <span>Not found: {{ summary.not_found }}</span>
+  </div>
+  <div class="actions">
+    <form action="/runs/{{ run.id }}/generate" method="post">
+      <button type="submit">Generate answers</button>
+    </form>
+    <form action="/runs/{{ run.id }}/reuse" method="post">
+      <button type="submit" class="btn btn-secondary">Reuse questionnaire</button>
+    </form>
+    <a href="/runs/{{ run.id }}/review" class="btn btn-secondary">Review answers</a>
+    <a href="/dashboard" class="btn btn-secondary">Back to dashboard</a>
+  </div>
+</section>
+
+<section class="panel reveal">
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Question</th>
+        <th>Answer</th>
+        <th>Citations</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for question in questions %}
+      <tr>
+        <td>{{ question.position }}</td>
+        <td>{{ question.text }}</td>
+        <td>{% if question.answer %}{{ question.answer.generated_answer }}{% else %}-{% endif %}</td>
+        <td>
+          {% if question.answer and question.answer.citations %}
+            {{ question.answer.citations | join("; ") }}
+          {% else %}
+            -
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  </div>
+</section>
+{% endblock %}

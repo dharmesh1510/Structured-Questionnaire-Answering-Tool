@@ -1,0 +1,7 @@
+Incident Response Handbook v2.0
+
+Incidents are classified into Severity 1, Severity 2, and Severity 3 levels.
+Severity 1 incidents trigger customer communication within 4 hours of confirmation.
+The security team runs incident drills twice per year and performs post-incident reviews for all Severity 1 and Severity 2 events.
+Root-cause analysis reports are documented within 10 business days after closure.
+Customers can report incidents through support@almaledger.example or the in-app support portal.

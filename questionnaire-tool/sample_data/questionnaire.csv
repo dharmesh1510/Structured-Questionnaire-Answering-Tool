@@ -1,0 +1,16 @@
+Question ID,Question,Category
+Q1,How is customer data encrypted in transit and at rest?,Security
+Q2,Do you enforce multi-factor authentication for production access?,Security
+Q3,How long are security logs retained?,Security
+Q4,How frequently are penetration tests performed?,Security
+Q5,What is your incident severity model?,Operations
+Q6,How quickly do you notify customers after a critical incident?,Operations
+Q7,Where is customer data hosted?,Privacy
+Q8,How long are backups retained?,Privacy
+Q9,What is your RTO and RPO for critical services?,Resilience
+Q10,How often do you run business continuity tests?,Resilience
+Q11,How quickly are GDPR deletion requests fulfilled?,Privacy
+Q12,Do you support hardware token-only MFA for all customers?,Security
+Q13,Do you maintain ISO 27001 certification and what is the certificate number?,Compliance
+Q14,What is your guaranteed customer support response SLA for all paid plans?,Support
+Q15,Do you provide on-premise deployment in customer-managed data centers?,Deployment

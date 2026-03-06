@@ -1,0 +1,6 @@
+Business Continuity Plan v1.4
+
+AlmaLedger maintains a documented disaster recovery plan with Recovery Time Objective (RTO) of 8 hours and Recovery Point Objective (RPO) of 1 hour for critical services.
+High availability is maintained through multi-zone deployment in the primary region.
+Business continuity testing is performed once per year, and findings are tracked to closure.
+On-call operations follow a 24x7 rotation for production incidents.
