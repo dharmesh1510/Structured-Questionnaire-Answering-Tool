@@ -46,7 +46,7 @@ See: `sample_data/fictional_company.md`
 ## Tech stack
 
 - Backend: FastAPI
-- UI: Jinja templates + Streamlit option
+- UI: Jinja templates
 - Database: SQLite (`data/app.db`)
 - ORM: SQLAlchemy
 - AI: OpenAI API (if key is provided)
@@ -119,37 +119,13 @@ python -m uvicorn app.main:app --reload
 
 `http://127.0.0.1:8000`
 
-## Streamlit run (optional)
-
-```bash
-streamlit run streamlit_app.py
-```
-
-## Deploy to Streamlit Cloud
-
-1. Push code to GitHub
-2. Streamlit Cloud -> New app
-3. Select:
-   - Repo: your repo
-   - Branch: `main`
-   - Main file: `streamlit_app.py`
-4. Add secrets:
-   - `APP_SECRET`
-   - `OPENAI_API_KEY` (optional)
-   - `OPENAI_MODEL` (optional)
-5. Deploy
-
 ## Deploy to Railway
 
 In Railway, create a new project from your GitHub repo and set:
 
 - Root Directory: `questionnaire-tool`
 - Build command: `pip install -r requirements.txt`
-
-Choose one start command:
-
-- Streamlit app: `streamlit run streamlit_app.py --server.address 0.0.0.0 --server.port $PORT`
-- FastAPI app (same original UI): `uvicorn app.main:app --host 0.0.0.0 --port $PORT`
+- Start command: `uvicorn app.main:app --host 0.0.0.0 --port $PORT`
 
 Environment variables:
 
