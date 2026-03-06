@@ -150,7 +150,7 @@ How to Run the Project
 
 Clone the repository:
 
-git clone https://github.com/yourusername/questionnaire-ai.git
+git clone - https://github.com/dharmesh1510/Structured-Questionnaire-Answering-Tool.git
 
 Install dependencies:
 
@@ -159,3 +159,4 @@ pip install -r requirements.txt
 Run the application:
 
 streamlit run app.py
+
