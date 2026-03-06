@@ -139,6 +139,30 @@ streamlit run streamlit_app.py
    - `OPENAI_MODEL` (optional)
 5. Deploy
 
+## Deploy to Railway
+
+In Railway, create a new project from your GitHub repo and set:
+
+- Root Directory: `questionnaire-tool`
+- Build command: `pip install -r requirements.txt`
+
+Choose one start command:
+
+- Streamlit app: `streamlit run streamlit_app.py --server.address 0.0.0.0 --server.port $PORT`
+- FastAPI app (same original UI): `uvicorn app.main:app --host 0.0.0.0 --port $PORT`
+
+Environment variables:
+
+- `APP_SECRET` = long random string
+- `OPENAI_API_KEY` = optional
+- `OPENAI_MODEL` = optional (`gpt-4.1-mini`)
+
+For persistent DB on Railway:
+
+1. Add a PostgreSQL service in the same Railway project.
+2. Railway provides `DATABASE_URL` automatically.
+3. This app will use `DATABASE_URL` if present, otherwise local SQLite.
+
 ## Final submission items
 
 - Live app link
